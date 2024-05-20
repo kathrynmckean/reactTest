@@ -17,14 +17,13 @@ code {
 }
 
 html {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 body {
   min-height: 100vh;
-  font-family: 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -mox-osx-font-smoothing: grayscale;
 }
@@ -35,15 +34,16 @@ body {
   justify-content: center;
   align-items: center;
   height: calc(100vh);
-  max-width: 500px;
-  border: 1px solid mediumblue;
-margin: auto;
+  max-width: 600px;
+  /* border: 5px solid black; */
+  margin: auto;
+  /* background-color: lightpink; */
 }
 
 header {
   width: calc(100%);
   padding: 0 0.25em;
-  background-color: mediumblue;
+  background-color: black;
   color: aliceblue;
   display: flex;
   justify-content: space-between;
@@ -51,23 +51,87 @@ header {
 }
 
 main {
-  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
   overflow-y: auto;
-
 }
 
 footer {
   width: calc(100%);
   padding: 0 0.25em;
-  background-color: mediumblue;
+  background-color: rgb(0, 0, 0);
   color: aliceblue;
   display: flex;
   /* justify-content: space-between; */
   justify-content: center;
   align-items: center;
+}
+
+nav {
+  display: flex;
+  padding: 10px;
+  display: flex;
+  background-color: #303030;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+}
+
+button {
+  transition: opacity 0.25s ease-in-out;
+  background-color: #fff;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 6px 10px;
+  margin-right: 5px;
+  text-align: center;
+  width: 60px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 12px;
+}
+
+#newButton {
+  margin-left: auto;
+}
+
+#noteContainer {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 33% 33% 33%;
+  min-height: 200px;
+  min-width: 500px;
+  justify-content: space-between;
+  background-color: #bcbcbc;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.gridSquare {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 15px;
+  height: 200px;
+  /* width: 200px; */
+  /* min-width: 150px; */
+  /* max-width: 300px; */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /*       white-space: nowrap; */
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  /* border: 3px solid transparent; */
+  transition: width 1s ease-in-out;
+}
+
+.gridSquare:hover {
+  /* border: 3px solid white; */
+  box-shadow: 0px 0px 3px black inset;
 }
