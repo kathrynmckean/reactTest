@@ -1,4 +1,4 @@
-const Nav = ({ logo }) => {
+const Nav = ({ showNav }) => {
   const handleClick = () => {
     console.log();
   };
@@ -21,6 +21,8 @@ const Nav = ({ logo }) => {
   return (
     <nav>
       {/* if a note is selected then show the buttons */}
+      {showNav && (
+        <>
       <button id="backButton" onClick={backToNotes}>
         back
       </button>
@@ -33,6 +35,8 @@ const Nav = ({ logo }) => {
       <button id="newButton" onClick={newNote}>
         +
       </button>
+      </>
+)}
     </nav>
   );
 };

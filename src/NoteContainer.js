@@ -1,9 +1,11 @@
 import Nav from "./Nav.js";
 
-const NoteContainer = () => {
+const NoteContainer = ({ setShowNav }) => {
   const expandNote = (num) => {
     console.log(num);
     console.log(Nav);
+    setShowNav((prevState) => !prevState
+    );
   };
   return (
     <div id="noteContainer">

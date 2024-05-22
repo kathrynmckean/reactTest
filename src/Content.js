@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav.js";
 import NoteContainer from "./NoteContainer.js";
 import NoteEditor from "./NoteEditor.js";
 
 const Content = () => {
+  const [showNav, setShowNav] = useState(false);
   const handleClick = (e) => {
     console.log(e);
   };
@@ -21,8 +22,8 @@ const Content = () => {
       {/* <button onClick={() => handleClick2("katie")}>Click here</button>
       <button onClick={(e) => handleClick3(e)}>Click here</button> */}
       {/* <button onClick={(e) => handleClick(e)}>back</button> */}
-      <Nav />
-      <NoteContainer />
+      <Nav showNav={showNav} />
+      <NoteContainer setShowNav={setShowNav} />
     </main>
   );
 };
