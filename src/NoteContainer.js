@@ -1,6 +1,9 @@
+import Nav from "./Nav.js";
+
 const NoteContainer = () => {
   const expandNote = (num) => {
     console.log(num);
+    console.log(Nav);
   };
   return (
     <div id="noteContainer">

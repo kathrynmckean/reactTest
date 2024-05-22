@@ -6,12 +6,30 @@ const Nav = ({ logo }) => {
   const newNote = () => {
     console.log("new note");
   };
+  const deleteNote = () => {
+    console.log("delete note");
+  };
+  const editNote = () => {
+    console.log("edit note");
+  };
+  const backToNotes = () => {
+    console.log("back to note");
+  };
+  const isSelectedNote = this;
+  console.log(isSelectedNote);
 
   return (
     <nav>
-      <button id="backButton">back</button>
-      <button id="editButton">edit</button>
-      <button id="deleteButton">delete</button>
+      {/* if a note is selected then show the buttons */}
+      <button id="backButton" onClick={backToNotes}>
+        back
+      </button>
+      <button id="editButton" onClick={editNote}>
+        edit
+      </button>
+      <button id="deleteButton" onClick={deleteNote}>
+        delete
+      </button>
       <button id="newButton" onClick={newNote}>
         +
       </button>
