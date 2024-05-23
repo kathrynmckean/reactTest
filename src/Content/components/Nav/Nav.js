@@ -1,27 +1,38 @@
 const Nav = ({
   showNav,
   setShowNav,
+  showEditor,
   setShowEditor,
-  selectedNote,
-  setSelectedNote,
+  selectedId,
+  setSelectedId,
+  notes,
+  setNotes,
+  handleNewNote
 }) => {
+
+
   const deleteNote = () => {
     console.log("delete note");
   };
-  const editNote = () => {
+
+  const editNote = () => { // show noteEditor
     setShowEditor((prevState) => !prevState);
   };
-  const backToNotes = () => {
-    console.log("back to note");
-    // stop highlighting the clicked note
-    setShowNav((prevState) => !prevState);
-    // hide the editing screen
-    setShowEditor((prevState) => !prevState);
-    // const selectedId = document.querySelector("nav").className;
-    // const findSelectedNote = document.getElementById(selectedId);
-    // findSelectedNote.classList.replace("selectedNote", "unselectedNote");
-    setSelectedNote(null);
+
+  const backToNotes = () => { // clicking the back button
+    setShowNav((prevState) => !prevState); // hide the nav bar
+    if (showEditor) {// if the editing screen is visible then hide it
+      setShowEditor((prevState) => !prevState)
+    }
+    setSelectedId(null); // stop highlighting the clicked note
   };
+
+  const handleNewButtonClick = () => {
+    handleNewNote();
+    if (showNav) {
+      backToNotes();
+    }
+  }
 
   return (
     <nav>
@@ -41,7 +52,7 @@ const Nav = ({
         </>
       )}
       {/* TODO: add something for the onclick here */}
-      <button id="newButton" onClick={() => {}}>
+      <button id="newButton" onClick={handleNewButtonClick}>
         +
       </button>
     </nav>

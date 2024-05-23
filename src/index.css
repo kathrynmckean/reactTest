@@ -129,10 +129,10 @@ button {
   transition: width 1s ease-in-out;
 }
 
-.gridSquare:hover,
+.gridSquare:hover, .gridSquare:focus,
 .selectedNote {
   /* border: 3px solid white; */
-  box-shadow: 0px 0px 3px black inset;
+  box-shadow: 0px 0px 3px blue inset;
 }
 
 #noteEditorContainer {
