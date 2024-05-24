@@ -1,0 +1,28 @@
+nav {
+  display: flex;
+  padding: 10px;
+  display: flex;
+  background-color: var(--med2);
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+}
+
+button {
+  transition: opacity 0.25s ease-in-out;
+  background-color: var(--light1);
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 6px 10px;
+  margin-right: 5px;
+  text-align: center;
+  width: 60px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 12px;
+}
+
+#newButton {
+  margin-left: auto;
+}

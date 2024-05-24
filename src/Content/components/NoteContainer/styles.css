@@ -1,0 +1,38 @@
+#noteContainer {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 32% 32% 32%;
+  min-height: 200px;
+  min-width: 500px;
+  justify-content: space-between;
+  background-color: var(--light2);
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+}
+
+.gridSquare {
+  background-color: var(--light1);
+  border-radius: 10px;
+  margin: 0px;
+  padding: 10px;
+  height: 200px;
+  /* width: 200px; */
+  /* min-width: 150px; */
+  /* max-width: 300px; */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /*       white-space: nowrap; */
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  /* border: 3px solid transparent; */
+  transition: width 1s ease-in-out;
+}
+
+.gridSquare:hover,
+.gridSquare:focus,
+.selectedNote {
+  /* border: 3px solid white; */
+  box-shadow: 0px 0px 3px blue inset;
+}

@@ -7,32 +7,30 @@ const Nav = ({
   setSelectedId,
   notes,
   setNotes,
-  handleNewNote
+  handleNewNote,
+  handleDeleteNote,
 }) => {
-
-
-  const deleteNote = () => {
-    console.log("delete note");
-  };
-
-  const editNote = () => { // show noteEditor
+  const editNote = () => {
+    // show noteEditor
     setShowEditor((prevState) => !prevState);
   };
 
-  const backToNotes = () => { // clicking the back button
+  const backToNotes = () => {
+    // clicking the back button
     setShowNav((prevState) => !prevState); // hide the nav bar
-    if (showEditor) {// if the editing screen is visible then hide it
-      setShowEditor((prevState) => !prevState)
+    if (showEditor) {
+      // if the editing screen is visible then hide it
+      setShowEditor((prevState) => !prevState);
     }
     setSelectedId(null); // stop highlighting the clicked note
   };
 
   const handleNewButtonClick = () => {
     handleNewNote();
-    if (showNav) {
-      backToNotes();
+    if (!showNav) {
+      setShowNav(true);
     }
-  }
+  };
 
   return (
     <nav>
@@ -46,7 +44,7 @@ const Nav = ({
           <button id="editButton" onClick={editNote}>
             edit
           </button>
-          <button id="deleteButton" onClick={deleteNote}>
+          <button id="deleteButton" onClick={handleDeleteNote}>
             delete
           </button>
         </>

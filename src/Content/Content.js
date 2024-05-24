@@ -4,56 +4,65 @@ import NoteContainer from "./components/NoteContainer";
 import NoteEditor from "./components/NoteEditor";
 let nextId = 3;
 const Content = () => {
-  
   const [showNav, setShowNav] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   // const [selectedNote, setSelectedNote] = useState(null);
   const handleNewNote = () => {
-    console.log('new note')
+    console.log("new note");
     selectNote(nextId); // highlight the new note
-    setShowEditor(true) // show the editor
+    setShowEditor(true); // show the editor
+    setNotes([
+      {
+        id: nextId,
+        title: "New note",
+        subtitle: "edit content",
+        class: "gridSquare",
+      },
+      ...notes,
+    ]);
+    nextId += 1;
+  };
 
-    setNotes(
-      [
-        {id: nextId, title: "", subtitle: "blank", class: 'gridSquare'},
-        ...notes
-      ])
-    nextId+=1;
-  }
+  const handleDeleteNote = () => {
+    console.log(selectedId);
+  };
 
-  const selectNote = (noteId) => { // runs when a note is clicked
-      setShowNav(true)
+  const selectNote = (noteId) => {
+    // runs when a note is clicked
+    setShowNav(true);
     setSelectedId(noteId); // highlight the note itself
   };
 
-  const [notes, setNotes] = useState([ // the array holding note information
-  {
-    id: 1,
-    title: "sample",
-    subtitle: "sample also",
-    class: "gridSquare",
-  },
-  {
-    id: 2,
-    title: "sample2",
-    subtitle: "sample2 also",
-    class: "gridSquare",
-  },
-]);
+  const [notes, setNotes] = useState([
+    // the array holding note information
+    {
+      id: 1,
+      title: "sample",
+      subtitle: "sample also",
+      class: "gridSquare",
+    },
+    {
+      id: 2,
+      title: "sample2",
+      subtitle: "sample2 also",
+      class: "gridSquare",
+    },
+  ]);
 
   return (
     <main>
       <Nav
         showNav={showNav}
         setShowNav={setShowNav}
-        showEditor = {showEditor}
+        showEditor={showEditor}
         setShowEditor={setShowEditor}
         selectedId={selectedId}
         setSelectedId={setSelectedId}
-        notes = {notes}
-        setNotes = {setNotes}
-        handleNewNote = {handleNewNote}
+        notes={notes}
+        setNotes={setNotes}
+        handleNewNote={handleNewNote}
+        handleDeleteNote={handleDeleteNote}
         // selectedNote={selectedNote}
         // setSelectedNote={setSelectedNote}
       />
@@ -61,10 +70,10 @@ const Content = () => {
       <NoteContainer
         setShowNav={setShowNav}
         selectedId={selectedId}
-        setSelectedId= {setSelectedId}
-        notes = {notes}
-        setNotes = {setNotes}
-        selectNote = {selectNote}
+        setSelectedId={setSelectedId}
+        notes={notes}
+        setNotes={setNotes}
+        selectNote={selectNote}
         // selectedNote={selectedNote}
         // setSelectedNote={setSelectedNote}
       />

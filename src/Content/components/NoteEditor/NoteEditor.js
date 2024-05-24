@@ -3,7 +3,10 @@ const NoteEditor = ({ showEditor, setShowEditor }) => {
     <div id="noteEditorContainer">
       {showEditor && (
         <>
-          <div id="noteEditor"></div>
+          <div id="noteEditor">
+            <div id="noteEditorHeader">Sample</div>
+            <textarea name="noteEditorText" id="noteEditorText"></textarea>
+          </div>
         </>
       )}
     </div>
