@@ -11,9 +11,8 @@ const Nav = ({
   handleDeleteNote,
   handleSaveNote,
   showSave,
-  setShowSave
+  setShowSave,
 }) => {
-
   const editNote = () => {
     // show noteEditor
     setShowEditor((prevState) => !prevState);
@@ -35,7 +34,7 @@ const Nav = ({
 
   const handleNewButtonClick = () => {
     backToNotes();
-    setShowSave(true)
+    setShowSave(true);
     handleNewNote();
     if (!showNav) {
       setShowNav(true);
@@ -45,7 +44,9 @@ const Nav = ({
   return (
     <nav>
       {showNav && (
-        <> {/* if a note is selected then show the buttons */}
+        <>
+          {" "}
+          {/* if a note is selected then show the buttons */}
           <button id="backButton" onClick={backToNotes}>
             back
           </button>
@@ -55,15 +56,16 @@ const Nav = ({
           <button id="deleteButton" onClick={handleDeleteNote}>
             delete
           </button>
-          {showSave && 
-            (  <button id="saveButton" onClick={handleSaveNote}>
-            save
-          </button>)
-          }
-        
+          {showSave && (
+            <button id="saveButton" onClick={handleSaveNote}>
+              save
+            </button>
+          )}
         </>
       )}
-      <button id="newButton" onClick={handleNewButtonClick}>+</button>
+      <button id="newButton" onClick={handleNewButtonClick}>
+        +
+      </button>
     </nav>
   );
 };
