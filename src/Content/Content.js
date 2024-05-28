@@ -1,54 +1,89 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import NoteContainer from "./components/NoteContainer";
 import NoteEditor from "./components/NoteEditor";
+
 let nextId = 3;
+
+
 const Content = () => {
   const [showNav, setShowNav] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  // const [selectedNote, setSelectedNote] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [noteInputValue, setNoteInputValue] = useState(null);
+  const [showSave, setShowSave] = useState(false);
+
+  const [notes, setNotes] = useState([
+    // the array holding note information
+    {
+      id: 1,
+      title: "title 1, first note",
+      subtitle: "subtitle 1, first note",
+      class: "gridSquare",
+    },
+    {
+      id: 2,
+      title: "title 2, second note",
+      subtitle: "subtitle 2, second note",
+      class: "gridSquare",
+    },
+  ]);
+
+  const storedNotes = localStorage.getItem("noteStorage");
+
+  useEffect(() => {
+    if (storedNotes) {
+      const parsedNotes = JSON.parse(storedNotes);
+      setNotes(parsedNotes);
+    }
+  }, [storedNotes])
+
+
+
   const handleNewNote = () => {
     console.log("new note");
-    selectNote(nextId); // highlight the new note
-    setShowEditor(true); // show the editor
+    const newNote = {
+      id: nextId,
+      title: "brand new note",
+      subtitle: "new note, edit content here",
+      class: "gridSquare",
+    }
     setNotes([
-      {
-        id: nextId,
-        title: "New note",
-        subtitle: "edit content",
-        class: "gridSquare",
-      },
+      newNote,
       ...notes,
     ]);
+    selectNote(nextId); // highlight the new note
+    setSelectedNote(newNote);
+    setShowEditor(true); // show the editor
     nextId += 1;
   };
 
+
   const handleDeleteNote = () => {
-    console.log(selectedId);
+    const newArray = notes.filter(note => {
+      return note.id !== selectedNote.id
+    });
+    setNotes(newArray);
   };
 
   const selectNote = (noteId) => {
     // runs when a note is clicked
     setShowNav(true);
     setSelectedId(noteId); // highlight the note itself
+    console.log("notes in selectNote", notes);
+    const noteToBeSelected = notes.find(note => note.id === noteId);
+    setSelectedNote(noteToBeSelected);
   };
 
-  const [notes, setNotes] = useState([
-    // the array holding note information
-    {
-      id: 1,
-      title: "sample",
-      subtitle: "sample also",
-      class: "gridSquare",
-    },
-    {
-      id: 2,
-      title: "sample2",
-      subtitle: "sample2 also",
-      class: "gridSquare",
-    },
-  ]);
+  const handleSaveNote = () => {
+    console.log('save')
+    localStorage.setItem("noteStorage", JSON.stringify(notes));
+  }
+
+
+
+
 
   return (
     <main>
@@ -63,10 +98,17 @@ const Content = () => {
         setNotes={setNotes}
         handleNewNote={handleNewNote}
         handleDeleteNote={handleDeleteNote}
-        // selectedNote={selectedNote}
-        // setSelectedNote={setSelectedNote}
+        showSave={showSave}
+        setShowSave={setShowSave}
+        handleSaveNote={handleSaveNote}
+
       />
-      <NoteEditor showEditor={showEditor} setShowEditor={setShowEditor} />
+      <NoteEditor showEditor={showEditor} 
+      setShowEditor={setShowEditor}  
+      selectedNote={selectedNote} 
+      noteInputValue={noteInputValue}
+      setNoteInputValue={setNoteInputValue}
+       />
       <NoteContainer
         setShowNav={setShowNav}
         selectedId={selectedId}
@@ -74,8 +116,6 @@ const Content = () => {
         notes={notes}
         setNotes={setNotes}
         selectNote={selectNote}
-        // selectedNote={selectedNote}
-        // setSelectedNote={setSelectedNote}
       />
     </main>
   );

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const NoteContainer = ({
   setShowNav,
   selectedNote,
@@ -25,7 +23,8 @@ const NoteContainer = ({
             selectNote(note.id);
           }}
         >
-          <div id={`title${note.id}`}>{note.title}</div>
+          <div class="title" id={`title${note.id}`}>{note.title}</div>
+          <div class="subtitle" id={`subtitle${note.id}`}>{note.subtitle}</div>
         </div>
       ))}
     </div>

@@ -9,10 +9,15 @@ const Nav = ({
   setNotes,
   handleNewNote,
   handleDeleteNote,
+  handleSaveNote,
+  showSave,
+  setShowSave
 }) => {
+
   const editNote = () => {
     // show noteEditor
     setShowEditor((prevState) => !prevState);
+    setShowSave(true);
   };
 
   const backToNotes = () => {
@@ -22,10 +27,15 @@ const Nav = ({
       // if the editing screen is visible then hide it
       setShowEditor((prevState) => !prevState);
     }
+    if (showSave) {
+      setShowSave(false);
+    }
     setSelectedId(null); // stop highlighting the clicked note
   };
 
   const handleNewButtonClick = () => {
+    backToNotes();
+    setShowSave(true)
     handleNewNote();
     if (!showNav) {
       setShowNav(true);
@@ -34,10 +44,8 @@ const Nav = ({
 
   return (
     <nav>
-      {/* if a note is selected then show the buttons */}
-
       {showNav && (
-        <>
+        <> {/* if a note is selected then show the buttons */}
           <button id="backButton" onClick={backToNotes}>
             back
           </button>
@@ -47,12 +55,15 @@ const Nav = ({
           <button id="deleteButton" onClick={handleDeleteNote}>
             delete
           </button>
+          {showSave && 
+            (  <button id="saveButton" onClick={handleSaveNote}>
+            save
+          </button>)
+          }
+        
         </>
       )}
-      {/* TODO: add something for the onclick here */}
-      <button id="newButton" onClick={handleNewButtonClick}>
-        +
-      </button>
+      <button id="newButton" onClick={handleNewButtonClick}>+</button>
     </nav>
   );
 };

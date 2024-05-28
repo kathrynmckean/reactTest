@@ -1,11 +1,15 @@
-const NoteEditor = ({ showEditor, setShowEditor }) => {
+const NoteEditor = ({ showEditor, setShowEditor, selectedNote, setNoteInputValue, noteInputValue }) => {
+  console.log('selected note in editor', selectedNote)
+  const handleOnChange = (e) => {
+      setNoteInputValue(e.target.value); 
+  }
   return (
     <div id="noteEditorContainer">
       {showEditor && (
         <>
           <div id="noteEditor">
-            <div id="noteEditorHeader">Sample</div>
-            <textarea name="noteEditorText" id="noteEditorText"></textarea>
+            <div id="noteEditorHeader">{selectedNote?.title ?? ""}</div>
+            <textarea name="noteEditorText" id="noteEditorText" defaultValue={selectedNote?.subtitle ?? ""} onChange={handleOnChange} ></textarea>
           </div>
         </>
       )}

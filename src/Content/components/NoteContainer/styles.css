@@ -30,6 +30,10 @@
   transition: width 1s ease-in-out;
 }
 
+.subtitle  {
+  font-size: .75rem;
+}
+
 .gridSquare:hover,
 .gridSquare:focus,
 .selectedNote {
