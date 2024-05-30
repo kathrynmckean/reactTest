@@ -72,42 +72,18 @@ const Content = () => {
   };
 
   const handleSaveNote = () => {
-    console.log("save");
-    console.log("note input value", noteInputValue);
-    // selected note value = noteInputValue
-    console.log(selectedNote);
-
     const newArray = notes.filter((note) => {
       return note.id !== selectedNote.id;
     });
-    setNotes(newArray);
-
-    // tried to replace content itself
-    // const newishArray = notes.map((note) => {
-    //   if (note.id === selectedId) {
-    //     return (note.name = noteInputValue);
-    //   } else {
-    //     return note;
-    //   }
-    // });
-    // setNotes(newishArray);
-
-    // create a new item in the array with the selectedId
-
     const newNote = {
       id: selectedId,
       title: selectedNote?.title ?? "",
       subtitle: noteInputValue,
       class: "gridSquare",
     };
+    setNotes([newNote, ...newArray]);
 
-    setNotes([newNote, ...notes]);
-
-    // selectNote(nextId); // highlight the new note
-    // setSelectedNote(newNote);
-    // setShowEditor(true); // show the editor
-
-    localStorage.setItem("noteStorage", JSON.stringify(notes));
+    localStorage.setItem("noteStorage", JSON.stringify([newNote, ...newArray]));
   };
 
   const backToNotes = () => {
