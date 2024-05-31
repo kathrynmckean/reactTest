@@ -50,7 +50,9 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+
   align-items: center;
   overflow-y: auto;
   max-height: 80%;
