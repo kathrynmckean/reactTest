@@ -39,13 +39,10 @@ body {
 }
 
 header {
-  width: calc(100%);
-  padding: 0 0.25em;
-  background-color: var(--dark2);
-  color: aliceblue;
+  width: 600px;
+  padding: 0.5em;
+  color: var(--dark2);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 main {
@@ -56,6 +53,7 @@ main {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+  max-height: 80%;
 }
 
 footer {
