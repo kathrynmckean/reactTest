@@ -3,8 +3,6 @@ import Nav from "./components/Nav";
 import NoteContainer from "./components/NoteContainer";
 import NoteEditor from "./components/NoteEditor";
 
-let nextId = 3;
-
 const Content = () => {
   const [showNav, setShowNav] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
@@ -12,6 +10,10 @@ const Content = () => {
   const [selectedNote, setSelectedNote] = useState(null);
   const [noteInputValue, setNoteInputValue] = useState(null);
   const [showSave, setShowSave] = useState(false);
+  const [noteTitleValue, setNoteTitleValue] = useState(null);
+  // let [nextId, setNextId] = useState(0);
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
+  let nextId = 0;
 
   const [notes, setNotes] = useState([
     // the array holding note information
@@ -40,17 +42,20 @@ const Content = () => {
 
   const handleNewNote = () => {
     console.log("new note");
+    // findNextId();
+    // console.log("findnextid", findNextId);
     const newNote = {
-      id: nextId,
+      id: findNextId(),
       title: "brand new note",
       subtitle: "new note, edit content here",
       class: "gridSquare",
     };
     setNotes([newNote, ...notes]);
-    selectNote(nextId); // highlight the new note
+    // selectNote(nextId); // highlight the new note
+    selectNote(newNote.id);
     setSelectedNote(newNote);
     setShowEditor(true); // show the editor
-    nextId += 1;
+    setUnsavedChanges(true);
   };
 
   const handleDeleteNote = () => {
@@ -77,16 +82,25 @@ const Content = () => {
     });
     const newNote = {
       id: selectedId,
-      title: selectedNote?.title ?? "",
+      title: noteTitleValue,
       subtitle: noteInputValue,
       class: "gridSquare",
     };
     setNotes([newNote, ...newArray]);
-
+    setUnsavedChanges(false);
     localStorage.setItem("noteStorage", JSON.stringify([newNote, ...newArray]));
   };
 
   const backToNotes = () => {
+    if (unsavedChanges) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Do you want to leave without saving?",
+      );
+      if (!confirmLeave) {
+        return;
+      }
+    }
+    setUnsavedChanges(false);
     // clicking the back button
     setShowNav((prevState) => !prevState); // hide the nav bar
     if (showEditor) {
@@ -97,6 +111,17 @@ const Content = () => {
       setShowSave(false);
     }
     setSelectedId(null); // stop highlighting the clicked note
+    // if you hit back without hitting save, catch the error and prompt to save.
+  };
+
+  const findNextId = () => {
+    console.log(nextId, "nextid");
+    notes.forEach((note) => {
+      if (note.id >= nextId) {
+        nextId = note.id + 1;
+      }
+    });
+    return nextId;
   };
 
   return (
@@ -123,6 +148,9 @@ const Content = () => {
         selectedNote={selectedNote}
         noteInputValue={noteInputValue}
         setNoteInputValue={setNoteInputValue}
+        noteTitleValue={noteTitleValue}
+        setNoteTitleValue={setNoteTitleValue}
+        setUnsavedChanges={setUnsavedChanges}
       />
       <NoteContainer
         setShowNav={setShowNav}
