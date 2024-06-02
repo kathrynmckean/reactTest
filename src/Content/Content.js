@@ -19,14 +19,8 @@ const Content = () => {
     // the array holding note information
     {
       id: 1,
-      title: "title 1, first note",
-      subtitle: "subtitle 1, first note",
-      class: "gridSquare",
-    },
-    {
-      id: 2,
-      title: "title 2, second note",
-      subtitle: "subtitle 2, second note",
+      title: "Welcome to your notepad",
+      subtitle: "click this note to edit or delete",
       class: "gridSquare",
     },
   ]);
@@ -41,9 +35,6 @@ const Content = () => {
   }, [storedNotes]);
 
   const handleNewNote = () => {
-    console.log("new note");
-    // findNextId();
-    // console.log("findnextid", findNextId);
     const newNote = {
       id: findNextId(),
       title: "brand new note",
@@ -68,10 +59,11 @@ const Content = () => {
 
   const selectNote = (noteId) => {
     // runs when a note is clicked
-    backToNotes();
+    if (showEditor) {
+      backToNotes();
+    }
     setShowNav(true);
     setSelectedId(noteId); // highlight the note itself
-    console.log("notes in selectNote", notes);
     const noteToBeSelected = notes.find((note) => note.id === noteId);
     setSelectedNote(noteToBeSelected);
   };
@@ -115,7 +107,6 @@ const Content = () => {
   };
 
   const findNextId = () => {
-    console.log(nextId, "nextid");
     notes.forEach((note) => {
       if (note.id >= nextId) {
         nextId = note.id + 1;
